@@ -16,7 +16,7 @@ const { TRANSCRIPTION_PROMPT, AUDIT_PROMPT } = require('../prompts/converterProm
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 // Modelo principal para transcrição e auditoria
-const MODEL_NAME = 'gemini-1.5-pro';
+const MODEL_NAME = 'gemini-2.5-flash';
 
 /**
  * Converte um arquivo de imagem ou PDF em uma parte inline para a API do Gemini.
