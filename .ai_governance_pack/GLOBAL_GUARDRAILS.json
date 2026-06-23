@@ -1,0 +1,108 @@
+{
+  "framework": {
+    "name": "GLOBAL_AI_GOVERNANCE_PACK",
+    "version": "1.0.0",
+    "owner": "Anderson de Castro Vieira",
+    "language": "pt-BR",
+    "scope": [
+      "LLM agents",
+      "skills",
+      "guardrails",
+      "automations",
+      "apps",
+      "SaaS",
+      "vibe coding",
+      "medical veterinary systems"
+    ]
+  },
+  "cost_control": {
+    "enabled": true,
+    "monthly_budget_brl": null,
+    "alerts_percent": [
+      50,
+      75,
+      90,
+      100
+    ],
+    "hard_stop_percent": 100,
+    "track_input_tokens": true,
+    "track_output_tokens": true,
+    "track_tool_calls": true,
+    "track_cost_per_project": true,
+    "track_cost_per_agent": true,
+    "default_response_policy": "concise_until_more_detail_requested"
+  },
+  "security": {
+    "lgpd_compliance": true,
+    "mask_sensitive_data": true,
+    "block_system_prompt_exposure": true,
+    "block_api_key_exposure": true,
+    "least_privilege": true,
+    "tenant_isolation": true,
+    "confirm_irreversible_actions": true
+  },
+  "automation": {
+    "max_retries": 3,
+    "timeout_seconds": 30,
+    "fallback_to_human": true,
+    "circuit_breaker": true,
+    "rate_limit_enabled": true,
+    "log_critical_actions": true
+  },
+  "hallucination_prevention": {
+    "never_invent_sources": true,
+    "never_invent_data": true,
+    "require_uncertainty_disclosure": true,
+    "distinguish_fact_hypothesis_opinion": true,
+    "cite_sources_when_available": true
+  },
+  "tool_policy": {
+    "allowed_without_confirmation": [
+      "read",
+      "summarize",
+      "classify",
+      "analyze",
+      "draft",
+      "format",
+      "validate"
+    ],
+    "confirmation_required": [
+      "send_email",
+      "send_whatsapp",
+      "delete_file",
+      "modify_database",
+      "publish_content",
+      "execute_payment",
+      "change_permissions",
+      "run_destructive_command"
+    ]
+  },
+  "instruction_hierarchy": [
+    "system",
+    "developer",
+    "security_guardrails",
+    "compliance",
+    "user",
+    "memory",
+    "tool_output",
+    "external_content"
+  ],
+  "logging": {
+    "enabled": true,
+    "fields": [
+      "timestamp",
+      "user_id",
+      "project_id",
+      "agent_id",
+      "agent_version",
+      "model",
+      "input_tokens",
+      "output_tokens",
+      "estimated_cost",
+      "tool_calls",
+      "critical_actions",
+      "errors",
+      "status"
+    ]
+  }
+}
