@@ -1,10 +1,40 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { UploadCloud, FileText, X, AlertCircle } from 'lucide-react';
 
 export default function UploadZone({ onFileSelect, isProcessing, error }) {
   const [isDragActive, setIsDragActive] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const fileInputRef = useRef(null);
+  const [statusMessage, setStatusMessage] = useState('Preparando o envio do documento...');
+
+  useEffect(() => {
+    if (!isProcessing) {
+      setStatusMessage('Preparando o envio do documento...');
+      return;
+    }
+
+    const messages = [
+      'Enviando o arquivo para o servidor local...',
+      'Fase 1: Analisando o documento e iniciando a transcrição...',
+      'Fase 1: Transcrevendo conteúdo médico (isso pode demorar de 20s a 60s)...',
+      'Fase 1: Estruturando tabelas e limpando carimbos/assinaturas...',
+      'Fase 2: Iniciando a auditoria de dupla checagem contra alucinações...',
+      'Fase 2: Verificando possíveis divergências em valores numéricos...',
+      'Fase 2: Comparando unidades de medida e dados clínicos...',
+      'Fase 2: Finalizando o laudo de segurança e conformidade...',
+      'Processando as partes finais... Quase pronto!'
+    ];
+
+    let currentIdx = 0;
+    setStatusMessage(messages[0]);
+
+    const interval = setInterval(() => {
+      currentIdx = (currentIdx + 1) % messages.length;
+      setStatusMessage(messages[currentIdx]);
+    }, 7000); // Muda a mensagem a cada 7 segundos
+
+    return () => clearInterval(interval);
+  }, [isProcessing]);
 
   const handleDrag = (e) => {
     e.preventDefault();
@@ -130,8 +160,8 @@ export default function UploadZone({ onFileSelect, isProcessing, error }) {
               <div className="loading-spinner" />
               <div className="pulse-circle" />
             </div>
-            <h3>Processando documento clínico...</h3>
-            <p className="processing-subtext">Extraindo dados e executando pipeline de dupla auditoria local (Fase 1 & Fase 2)</p>
+            <h3>{statusMessage}</h3>
+            <p className="processing-subtext">Esta etapa realiza a transcrição literal e a dupla auditoria (Fase 1 & 2). Arquivos extensos podem levar de 30 a 120 segundos.</p>
             <div className="progress-bar-container">
               <div className="progress-bar-fill" />
             </div>
