@@ -29,8 +29,10 @@ export default function UploadZone({ onFileSelect, isProcessing, error }) {
     setStatusMessage(messages[0]);
 
     const interval = setInterval(() => {
-      currentIdx = (currentIdx + 1) % messages.length;
-      setStatusMessage(messages[currentIdx]);
+      if (currentIdx < messages.length - 1) {
+        currentIdx++;
+        setStatusMessage(messages[currentIdx]);
+      }
     }, 7000); // Muda a mensagem a cada 7 segundos
 
     return () => clearInterval(interval);

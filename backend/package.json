@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js",
+    "dev": "nodemon --ignore uploads/ server.js",
     "test": "jest --verbose",
     "test:unit": "jest tests/unit --verbose",
     "test:integration": "jest tests/integration --verbose",

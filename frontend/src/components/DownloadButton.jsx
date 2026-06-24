@@ -57,7 +57,7 @@ ${audit.divergencias && audit.divergencias.length > 0
   ? audit.divergencias.map((div, i) => `${i + 1}. [${div.tipo.toUpperCase()}] (Gravidade: ${div.gravidade})
    Localização: ${div.localizacao || 'Não especificada'}
    Texto Original: "${div.original || ''}"
-   Texto Markdown: "${div.gerado || ''}"
+   Texto Markdown: "${div.transcrito || div.gerado || ''}"
 --------------------------------------------------`).join('\n')
   : 'Nenhuma divergência ou alucinação identificada.'}
 `;

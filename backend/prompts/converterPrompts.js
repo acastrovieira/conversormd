@@ -52,6 +52,8 @@ Retorne um JSON válido com a seguinte estrutura:
   "divergencias": [
     {
       "tipo": "numero_incorreto" | "omissao" | "alucinacao" | "unidade_incorreta" | "nome_incorreto",
+      "gravidade": "alta" | "media" | "baixa",
+      "localizacao": "Identificação de onde está no documento (ex: tabela 1, linha 4, rodapé)",
       "descricao": "Descrição clara e objetiva da divergência encontrada",
       "original": "Texto como aparece no documento original",
       "transcrito": "Texto como foi transcrito no Markdown"

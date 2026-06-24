@@ -8,16 +8,26 @@ export default function AuditPanel({ audit }) {
   const isApproved = status === 'APROVADO';
 
   const getConfiancaBadge = (level) => {
-    switch (level?.toLowerCase()) {
+    let cleanLevel = level;
+    if (typeof level === 'number') {
+      if (level >= 0.9) cleanLevel = 'alta';
+      else if (level >= 0.7) cleanLevel = 'media';
+      else cleanLevel = 'baixa';
+    }
+
+    const levelStr = String(cleanLevel || '').toLowerCase();
+    const percentStr = typeof level === 'number' ? ` (${(level * 100).toFixed(0)}%)` : '';
+
+    switch (levelStr) {
       case 'alta':
-        return <span className="badge badge-success">Confiança Alta</span>;
+        return <span className="badge badge-success">Confiança Alta{percentStr}</span>;
       case 'media':
       case 'média':
-        return <span className="badge badge-warning">Confiança Média</span>;
+        return <span className="badge badge-warning">Confiança Média{percentStr}</span>;
       case 'baixa':
-        return <span className="badge badge-danger">Confiança Baixa</span>;
+        return <span className="badge badge-danger">Confiança Baixa{percentStr}</span>;
       default:
-        return <span className="badge badge-info">{level}</span>;
+        return <span className="badge badge-info">Confiança: {level}</span>;
     }
   };
 
@@ -117,7 +127,7 @@ export default function AuditPanel({ audit }) {
                   </div>
                   <div className="diff-box gerado">
                     <span className="diff-label">Texto no Markdown:</span>
-                    <p className="diff-text">{div.gerado || '[Faltando ou omitido]'}</p>
+                    <p className="diff-text">{div.transcrito || div.gerado || '[Faltando ou omitido]'}</p>
                   </div>
                 </div>
               </div>
